@@ -1,0 +1,16 @@
+{
+  "name": "api_basic_tcg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cartas.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon cartas.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
