@@ -38,19 +38,34 @@ app.get("/api/cartas/:id", (req, res) =>{
 
 
 function ifExists(datos) {
-    
+    let id = [];
+
+    for (let index = 0; index < cartas.length; index++) {
+        id.push(cartas[index].id)
+    }
+    console.log(id);
+    if (id.includes(datos.id)) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 app.post("/api/cartas", (req,res) =>{
 
     if (Array.isArray(req.body)){
         for (let i = 0; i < req.body.length; i++) {
-            ifExists(req.body[i]);
+            if (ifExists(req.body[i])) {
+                cartas.push(req.body[i])
+            }
         }
     }
     else {
         console.log(req.body);
-        cartas.push(req.body)
+        if (ifExists(req.body)) {
+            cartas.push(req.body)
+        }
     }
     res.status(201).send("Cartas creadas");
 });
