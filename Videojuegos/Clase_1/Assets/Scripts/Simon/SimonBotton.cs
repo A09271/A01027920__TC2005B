@@ -10,13 +10,16 @@ using UnityEngine.UI;
 public class SimonBotton : MonoBehaviour
 {
     Color originalColor;
+    AudioSource audioSource;
 
     public void Highlight(){
+        audioSource.Play();
         StartCoroutine(ChangeColor());
     }
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         originalColor = GetComponent<Image>().color;
     }
 

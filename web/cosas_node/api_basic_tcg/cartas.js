@@ -37,37 +37,61 @@ app.get("/api/cartas/:id", (req, res) =>{
 });
 
 
-function ifExists(datos) {
+function Evaluation(datos) {
     let id = [];
+    let llaves = ["id", "nombre", "ataque", "vida", "elixir"]
+    let idflag;
+    let flag;
 
     for (let index = 0; index < cartas.length; index++) {
         id.push(cartas[index].id)
     }
-    console.log(id);
     if (id.includes(datos.id)) {
-        return false;
+        idflag = false;
     }
     else {
-        return true;
+        idflag = true;
     }
+
+    for (let i = 0; i < llaves.length; i++) {
+        if (Object.keys(datos).includes(llaves[i])) {
+            flag = true;
+        }
+        else{
+            flag = false;
+            break;
+        }
+    }
+    return flag && idflag;
 }
 
 app.post("/api/cartas", (req,res) =>{
 
     if (Array.isArray(req.body)){
+        let estado = 0;
         for (let i = 0; i < req.body.length; i++) {
-            if (ifExists(req.body[i])) {
+            console.log(req.body[i]);
+            if (Evaluation(req.body[i])) {
                 cartas.push(req.body[i])
+                estado++;
             }
+        }
+        if (estado != 0) {
+            res.status(201).send("Cartas creadas");
+        } else{
+            res.status(400).send("id repetida o falta de atributos");
         }
     }
     else {
         console.log(req.body);
-        if (ifExists(req.body)) {
+        if (Evaluation(req.body)) {
             cartas.push(req.body)
+            res.status(201).send("Cartas creadas");
+        }
+        else {
+            res.status(400).send("id repetida o falta de atributos");
         }
     }
-    res.status(201).send("Cartas creadas");
 });
 
 app.delete("/api/cartas/:id", (req, res) =>{
@@ -78,22 +102,25 @@ app.delete("/api/cartas/:id", (req, res) =>{
         res.status(200).send("Lista de cartas vacía");
     }
     else {
-        for (let i = 0; i < cartas.length; i++) {
+        for (let i = 0; i <= cartas.length; i++) {
             if (cartasID == cartas[i].id) {
                 const id = cartas[i].id
                 cartas.splice(i,1);
                 res.status(200).send(`Se borró la carta: ${id}`)
+                break;
+            }
+            else if (i == cartas.length-1){
+                res.status(404).send(`No se encontró la id: ${cartasID}`)
+                break;
             }
         }
     }
-    res.status(404).send(`No se encontró la id: ${cartasID}`)
 });
 
 app.put("/api/cartas/:id", (req, res) => {
     const cartasID = req.params.id;
 
     let llave_mod = Object.keys(req.body);
-    console.log(llave_mod);
 
     if (cartas.length == 0) {
         res.status(200).send("Lista de cartas vacía");
@@ -102,21 +129,22 @@ app.put("/api/cartas/:id", (req, res) => {
         for (let i = 0; i <= cartas.length; i++) {
             if (cartasID == cartas[i].id) {
                 var crt = i;
-                console.log(crt);
                 break;
             }
             else if (i == cartas.length-1){
                 res.status(404).send(`No se encontró la id: ${cartasID}`)
+                break;
             }
         }
     }
     let llaves = Object.keys(cartas[crt]);
-    console.log(llaves);
+
     for (let i = 1; i < llaves.length; i++){
         if (llave_mod.includes(llaves[i])) {
             let index = llave_mod.indexOf(llaves[i]);
             cartas[crt][llaves[i]] = req.body[llave_mod[index]]
             res.status(200).send(`Se modifico la carta de id: ${cartasID}`);
+            break;
         }
     }
 });

@@ -61,7 +61,8 @@ public class SimonController : MonoBehaviour
     {
         if (playerTurn)
         {
-            Debug.Log("Pressed: "+ buttonID + " Should be: " + sequence[index]);
+            buttons[buttonID].GetComponent<SimonBotton>().Highlight();
+            //Debug.Log("Pressed: "+ buttonID + " Should be: " + sequence[index]);
             if (sequence[index] == buttonID){
                 index++;
                 if (index == sequence.Count)
