@@ -13,7 +13,7 @@ public class SimonBotton : MonoBehaviour
     AudioSource audioSource;
 
     public void Highlight(){
-        audioSource.Play();
+        //audioSource.Play();
         StartCoroutine(ChangeColor());
     }
     // Start is called before the first frame update

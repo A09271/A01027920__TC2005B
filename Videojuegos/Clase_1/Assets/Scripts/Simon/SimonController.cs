@@ -5,11 +5,14 @@ Script para generar una sequencia de botones y luego comparar los inputs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SimonController : MonoBehaviour
 {
     [SerializeField] List<int> sequence; //SerializedField para que sólo unity lo vea
     [SerializeField] GameObject[] buttons;
+
+    [SerializeField] TMP_Text scoreText;
 
     bool playerTurn = false;
 
@@ -17,7 +20,7 @@ public class SimonController : MonoBehaviour
 
     int level;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         NewGame();
     }
@@ -30,6 +33,11 @@ public class SimonController : MonoBehaviour
 
     void NewGame()
     {
+        if (!PlayerPrefs.HasKey("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+        }
+        scoreText.text = "Score: 0 - High Score: " + PlayerPrefs.GetInt("HighScore");
         sequence = new List<int>();
         index = 0;
         level = 0;
@@ -67,15 +75,20 @@ public class SimonController : MonoBehaviour
                 index++;
                 if (index == sequence.Count)
                 {
-                    AddNumber();
                     level++;
                     //Para que no se pierda el valor aún cuando cambia de escena
                     PlayerPrefs.SetInt("score", level);
-                }
+
+                    if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("HighScore"))
+                    {
+                        PlayerPrefs.SetInt("HighScore", PlayerPrefs.GetInt("score"));
+                    }
+                    AddNumber();
+                } else {
+                    Debug.Log("Game Over");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("SimonScore");
+                    }
             }
-        } else {
-            Debug.Log("Game Over");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("SimonScore");
         }
     }
 }

@@ -14,6 +14,8 @@ public class SimonScores : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
+    public void NewGame(){
+    }
     // Update is called once per frame
     void Update()
     {

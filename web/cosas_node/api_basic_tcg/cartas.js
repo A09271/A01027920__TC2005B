@@ -122,13 +122,14 @@ app.put("/api/cartas/:id", (req, res) => {
 
     let llave_mod = Object.keys(req.body);
 
+    let crt;
     if (cartas.length == 0) {
         res.status(200).send("Lista de cartas vacía");
     }
     else {
         for (let i = 0; i <= cartas.length; i++) {
             if (cartasID == cartas[i].id) {
-                var crt = i;
+                crt = i;
                 break;
             }
             else if (i == cartas.length-1){
