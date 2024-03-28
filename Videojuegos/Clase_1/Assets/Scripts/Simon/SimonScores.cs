@@ -15,6 +15,7 @@ public class SimonScores : MonoBehaviour
     }
 
     public void NewGame(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Simondice");
     }
     // Update is called once per frame
     void Update()
