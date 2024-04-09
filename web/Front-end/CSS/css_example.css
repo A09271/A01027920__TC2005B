@@ -1,0 +1,44 @@
+
+.container {
+    background-color: cyan;
+    border: 2px solid black;
+    border-radius: 5%;
+    margin: 10px;
+    padding: 5px;
+    width: 250 px;
+    height: 150 px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.box {
+    height: 500px;
+    display: flex; /*Para medio centrar*/
+    flex-wrap: wrap; /*para que no se encime desde el div*/
+    flex-direction: row;
+    justify-content: space-evenly; /*espacio entre elementos en eje x*/
+    align-content: end; /*centrar en eje y*/
+}
+
+.boxitem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+div{
+    border: 2px solid red;
+    margin: 10px;
+    padding: 10px;
+}
+
+body{
+    background-color: burlywood;
+    margin: 0;
+}
+
+h2{
+    margin: 0;
+    justify-content: center;
+}
