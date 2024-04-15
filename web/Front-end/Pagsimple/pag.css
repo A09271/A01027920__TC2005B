@@ -1,6 +1,23 @@
+#details {
+    display: flex;
+    flex-direction: column;
+}
+
+#button {
+    background-color: #b97d2d;
+    border: 1;
+    border-color: #b97d2d;
+    text-align: center;
+    color: white;
+}
+
+#jaja {
+    padding-left: 500px;
+}
+
 .divisores {
     background-color: #23434d;
-    padding: 5px;
+    padding: 6.5px;
     text-align: center;
 }
 
@@ -15,24 +32,12 @@
     height: 200px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .im_text {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-#details {
-    display: flex;
-    flex-direction: column;
-}
-
-#button {
-    background-color: #b97d2d;
-    border: 0;
-    text-align: center;
-    color: white;
 }
 
 body {
@@ -45,14 +50,21 @@ header {
 }
 
 img {
-    max-width: 50%;
-    max-height: 60%;
+    max-width: 80px;
+    max-height: 100px;
     padding-top: 10px;
 }
 
-b, h2, p, small {
+h2, p, small {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+b {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-right: 50px;
+    padding-left: 4%;
 }
 
 footer {
